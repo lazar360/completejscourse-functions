@@ -77,7 +77,7 @@
 // const greeterYo = greet('Yo');
 // greeterYo('Nicolas');
 
-// const greetArrowFunction = greeting => 
+// const greetArrowFunction = greeting =>
 //   name => console.log(`${greeting} ${name}`);
 // ;
 
@@ -86,23 +86,24 @@
 // THE CALL AND APPLY METHODS
 
 const lufthansa = {
-    airline: 'Lufthansa',
-    iataCode: 'LH',
-    bookings: [],
-    book(flightNum, name){
-        console.log(`${name} booked a seat on ${this.airline}, flight ${this.iataCode} ${flightNum}`);
-        this.bookings.push({flight: `${this.iataCode}${flightNum}`, name})
-    
-    },
+  airline: 'Lufthansa',
+  iataCode: 'LH',
+  bookings: [],
+  book(flightNum, name) {
+    console.log(
+      `${name} booked a seat on ${this.airline}, flight ${this.iataCode} ${flightNum}`
+    );
+    this.bookings.push({ flight: `${this.iataCode}${flightNum}`, name });
+  },
 };
 
 lufthansa.book(239, 'Nicolas');
 lufthansa.book(365, 'John');
 
 const eurowings = {
-    name: 'Eurowings',
-    iataCode: 'EW',
-    bookings: [],
+  name: 'Eurowings',
+  iataCode: 'EW',
+  bookings: [],
 };
 
 const book = lufthansa.book;
@@ -112,6 +113,15 @@ const book = lufthansa.book;
 
 book.call(eurowings, 23, 'Sarah Connors');
 
+// for an array
+//book.call(eurowings, ...flightData);
 
+// BIND METHOD
 
+const bookEW = book.bind(eurowings);
+const bookLH = book.bind(lufthansa);
+bookEW(23, 'Steven Williams');
+bookLH(23, 'John');
 
+const bookEW23 = book.bind(eurowings, 23);
+bookEW23('John');
