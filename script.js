@@ -62,13 +62,23 @@ transformer('Javascript is the best', oneWord);
 
 // functions returnin functions
 
-const greet = function(greeting){
-    return function(name){
-        console.log(`${greeting} ${name}`);
-    }
-}
+const greet = function (greeting) {
+  return function (name) {
+    console.log(`${greeting} ${name}`);
+  };
+};
 
 const greeterHey = greet('Hey');
 greeterHey('Jonas');
 greeterHey('Steven');
 
+greet('Hello')('Jonas');
+
+const greeterYo = greet('Yo');
+greeterYo('Nicolas');
+
+const greetArrowFunction = greeting => 
+  name => console.log(`${greeting} ${name}`);
+;
+
+greetArrowFunction('Hello')('Nicolas');
