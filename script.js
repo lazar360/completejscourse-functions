@@ -41,44 +41,77 @@
 
 // functions accepting callback functions
 
-const oneWord = function (str) {
-  return str.replace(/ /g, '').toLowerCase();
-};
+// const oneWord = function (str) {
+//   return str.replace(/ /g, '').toLowerCase();
+// };
 
-const upperFirstWord = function (str) {
-  const [first, ...others] = str.split(' ');
-  return [first.toUpperCase(), ...others].join(' ');
-};
+// const upperFirstWord = function (str) {
+//   const [first, ...others] = str.split(' ');
+//   return [first.toUpperCase(), ...others].join(' ');
+// };
 
-const transformer = function (str, fn) {
-  console.log(`Original string: ${str}`);
-  console.log(`Transformed string: ${fn(str)}`);
+// const transformer = function (str, fn) {
+//   console.log(`Original string: ${str}`);
+//   console.log(`Transformed string: ${fn(str)}`);
 
-  console.log(`Transformed by: ${fn.name}`);
-};
+//   console.log(`Transformed by: ${fn.name}`);
+// };
 
-transformer('Javascript is the best', upperFirstWord);
-transformer('Javascript is the best', oneWord);
+// transformer('Javascript is the best', upperFirstWord);
+// transformer('Javascript is the best', oneWord);
 
 // functions returnin functions
 
-const greet = function (greeting) {
-  return function (name) {
-    console.log(`${greeting} ${name}`);
-  };
+// const greet = function (greeting) {
+//   return function (name) {
+//     console.log(`${greeting} ${name}`);
+//   };
+// };
+
+// const greeterHey = greet('Hey');
+// greeterHey('Jonas');
+// greeterHey('Steven');
+
+// greet('Hello')('Jonas');
+
+// const greeterYo = greet('Yo');
+// greeterYo('Nicolas');
+
+// const greetArrowFunction = greeting => 
+//   name => console.log(`${greeting} ${name}`);
+// ;
+
+// greetArrowFunction('Hello')('Nicolas');
+
+// THE CALL AND APPLY METHODS
+
+const lufthansa = {
+    airline: 'Lufthansa',
+    iataCode: 'LH',
+    bookings: [],
+    book(flightNum, name){
+        console.log(`${name} booked a seat on ${this.airline}, flight ${this.iataCode} ${flightNum}`);
+        this.bookings.push({flight: `${this.iataCode}${flightNum}`, name})
+    
+    },
 };
 
-const greeterHey = greet('Hey');
-greeterHey('Jonas');
-greeterHey('Steven');
+lufthansa.book(239, 'Nicolas');
+lufthansa.book(365, 'John');
 
-greet('Hello')('Jonas');
+const eurowings = {
+    name: 'Eurowings',
+    iataCode: 'EW',
+    bookings: [],
+};
 
-const greeterYo = greet('Yo');
-greeterYo('Nicolas');
+const book = lufthansa.book;
 
-const greetArrowFunction = greeting => 
-  name => console.log(`${greeting} ${name}`);
-;
+// Does NOT work
+// book(23, 'John');
 
-greetArrowFunction('Hello')('Nicolas');
+book.call(eurowings, 23, 'Sarah Connors');
+
+
+
+
