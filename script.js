@@ -162,3 +162,5 @@ booker();
 booker();
 booker();
 
+console.dir(booker);
+
